@@ -1,0 +1,40 @@
+body{
+	transition: all 0.5s ease;
+}
+body.dark{
+	background-color: rgb(47, 59, 58);
+}
+body .btn-large{
+	background-color: rgb(47, 59, 58);
+	transition: all 0.5s ease;
+}
+body.dark .btn-large{
+	background-color: white;
+	color:  rgb(47, 59, 58);
+}
+body .collapsible-header, body .collapsible-body, body .collection-item, body .collection{
+	background: unset!important;
+    color: unset!important;
+}
+body.dark .collapsible-header,body.dark .collapsible-body, body.dark .collection-item, body.dark .collection{
+	background: gray!important;
+    color: white!important;
+}
+.btn:hover, .btn-large:hover, .btn-small:hover {
+    background-color: white;
+    color: rgb(47, 59, 58);
+}
+body.dark  .btn:hover, body.dark  .btn-large:hover, body.dark  .btn-small:hover {
+	color: white!important;
+    background-color: rgb(47, 59, 58)!important;
+}
+.waves-effect.waves-dark .waves-ripple {
+    background-color: rgba(47, 59, 58, 0.65);
+}
+.margin-small{
+	margin-top: 20px;
+}
+#stats{
+	max-width: 500px; 
+	margin: 0 auto;
+}
