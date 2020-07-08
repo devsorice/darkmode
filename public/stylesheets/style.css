@@ -20,6 +20,15 @@ body.dark .collapsible-header,body.dark .collapsible-body, body.dark .collection
 	background: gray!important;
     color: white!important;
 }
+
+body h2{
+	color: unset!important;
+}
+
+body.dark h2{
+	color: white!important;
+}
+
 .btn:hover, .btn-large:hover, .btn-small:hover {
     background-color: white;
     color: rgb(47, 59, 58);

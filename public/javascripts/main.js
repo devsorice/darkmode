@@ -2,12 +2,20 @@ var times = 0;
 var darkmode = false;
 var status = 'light';
 function toggleStats(){
-	var btn = document.querySelector('#stats');
-	btn.classList.toggle('hidden');
-	btn.innerText = darkmode ? 'Hide Stats' : 'Show Stats';
+	var area = document.querySelector('#stats');
+	area.classList.toggle('hidden');
+	document.querySelector('#stats-btn').innerText = area.classList.contains('hidden') ? 'Show Stats' :'Hide Stats';
 }
 function downloadStats(){
-	
+	var exportName ='stats';
+	var exportObj = {dark:{darkmode:darkmode,status:status},navi:_navigator};
+	var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+    var downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href",     dataStr);
+    downloadAnchorNode.setAttribute("download", exportName + ".json");
+    document.body.appendChild(downloadAnchorNode); // required for firefox
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
 }
 function toggleDarkMode(){
 	var body = document.querySelector('body');
@@ -19,24 +27,40 @@ function toggleDarkMode(){
 	btn.classList.toggle("waves-dark",  darkmode);
 	times+=1;
 	status = darkmode?'dark':'light';
+	updateStats();
+}
+function updateStats(){
+	var d = document.querySelector('#darkmode-info');
+	var html = "<div class='collection'>";
+	html += "<div class='collection-item'>Times Changed "+times+"</div>";
+	html += "<div class='collection-item'>Status  "+status+"</div>";
+	html +="</div>";
+	d.innerHTML = html;
 }
 document.addEventListener('DOMContentLoaded',function() {
+	updateStats();
 	document.querySelector('#dark-mode-btn').addEventListener('click',function(){
 		toggleDarkMode();
 	});
 	document.querySelector('#stats-btn').addEventListener('click',function(){
 		toggleStats();
 	});
-
+	document.querySelector('#download-btn').addEventListener('click',function(){
+		downloadStats();
+	});
 })
 //Caricamento statistiche navigatore
 var _navigator = {};
 for (var i in navigator) _navigator[i] = navigator[i];
 h = toUl(_navigator);
 console.log(h);
-stats.innerHTML =h; 
+stats.innerHTML +="<div><h2 class='center'>Dark Mode Stats</h2><div id='darkmode-info'></div></div>"; 
+stats.innerHTML +="<h2 class='center'>User Agent Info</h2>"; 
+stats.innerHTML +=h; 
 var elems = document.querySelectorAll('.collapsible');
 var instances = M.Collapsible.init(elems);
+elems = document.querySelectorAll('.tooltipped');
+instances = M.Tooltip.init(elems);
 function toUl(a){
 	console.log(a);
 	if(typeof a ==='function'){
