@@ -1,3 +1,35 @@
+var times = 0;
+var darkmode = false;
+var status = 'light';
+function toggleStats(){
+	var btn = document.querySelector('#stats');
+	btn.classList.toggle('hidden');
+	btn.innerText = darkmode ? 'Hide Stats' : 'Show Stats';
+}
+function downloadStats(){
+	
+}
+function toggleDarkMode(){
+	var body = document.querySelector('body');
+	var btn = document.querySelector('#dark-mode-btn');
+	darkmode = !darkmode;
+	body.classList.toggle("dark",darkmode);	
+	btn.innerText = darkmode ? 'Light Mode' : 'Dark Mode';
+	btn.classList.toggle("waves-light", !darkmode);
+	btn.classList.toggle("waves-dark",  darkmode);
+	times+=1;
+	status = darkmode?'dark':'light';
+}
+document.addEventListener('DOMContentLoaded',function() {
+	document.querySelector('#dark-mode-btn').addEventListener('click',function(){
+		toggleDarkMode();
+	});
+	document.querySelector('#stats-btn').addEventListener('click',function(){
+		toggleStats();
+	});
+
+})
+//Caricamento statistiche navigatore
 var _navigator = {};
 for (var i in navigator) _navigator[i] = navigator[i];
 h = toUl(_navigator);
@@ -31,35 +63,3 @@ function toUl(a){
 		return a.toString();
 	} 
 }
-var times = 0;
-var darkmode = false;
-var status = 'light';
-function toggleDarkMode(){
-	var body = document.querySelector('body');
-	var btn = document.querySelector('#dark-mode-btn');
-	darkmode = !darkmode;
-	body.classList.toggle("dark",darkmode);	
-	btn.innerText = darkmode ? 'Light Mode' : 'Dark Mode';
-	btn.classList.toggle("waves-light", !darkmode);
-	btn.classList.toggle("waves-dark",  darkmode);
-	times+=1;
-	status = darkmode?'dark':'light';
-}
-function toTable(obj){
-	var table = '';
-	for(const i in obj) {
-    var tr = "<tr>";
-    /* Verification to add the last decimal 0 */
-    if (obj[i].toString().substring(obj[i].toString().indexOf('.'), obj[i].toString().length) < 2) 
-        obj[i].value += "0";
-    /* Must not forget the $ sign */
-    tr += "<td>" + obj[i].key + "</td>" + "<td>$" + obj[i].toString() + "</td></tr>";
-	}
-	table+=tr;
- 	return tr;
-}
-document.addEventListener('DOMContentLoaded',function() {
-	document.querySelector('#dark-mode-btn').addEventListener('click',function(){
-		toggleDarkMode();
-	});
-})

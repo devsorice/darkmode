@@ -38,3 +38,6 @@ body.dark  .btn:hover, body.dark  .btn-large:hover, body.dark  .btn-small:hover 
 	max-width: 500px; 
 	margin: 0 auto;
 }
+.hidden{
+	display: none!important;
+}
