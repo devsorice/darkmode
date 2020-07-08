@@ -1,6 +1,5 @@
 # Dark Mode
 **Utilizzo**
-###
 ```console
 $ npm install
 $ npm start
